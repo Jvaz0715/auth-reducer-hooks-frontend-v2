@@ -5,10 +5,15 @@ import {
    Navigate, 
 } from 'react-router-dom';
 
-import Navbar from "./components/Navbar/Navbar";
-import Auth from "./components/Auth/Auth";
-import Home from "./components/Home/Home";
-import NotFound from "./components/NotFound/NotFound";
+// import Navbar from "./components/Navbar/Navbar";
+// import Auth from "./components/Auth/Auth";
+// import Home from "./components/Home/Home";
+// import NotFound from "./components/NotFound/NotFound";
+
+const Navbar = React.lazy(() => import("./components/Navbar/Navbar"));
+const Auth = React.lazy(() => import("./components/Auth/Auth"));
+const Home = React.lazy(() => import("./components/Home/Home"));
+const NotFound = React.lazy(() => import("./components/NotFound/NotFound"));
 
 function MainRouter() {
    return (
