@@ -10,6 +10,7 @@ import {
 import { MuiAlert } from "@material-ui/lab/Alert";
 import { useLocation } from 'react-router';
 import useChangeInputConfig from '../hooks/useInput';
+import useFetchAPI from '../hooks/useFetchAPI';
 
 const useStyles = makeStyles((theme) => ({
    root: {
@@ -25,6 +26,13 @@ function Auth(children) {
 
    let isLoginRoute = useLocation().pathname === "/login";
    let buttonTitle = isLoginRoute ? "Login" : "Sign up";
+   // for axios request
+   let apiURL = isLoginRoute ? "/users/login" : "/users/create-user";
+
+   const [
+      {isLoading, response, error},
+      handleAPICallButtonSubmit
+   ] = useFetchAPI(apiURL);
 
    // comes from our hooks
    const [
@@ -63,7 +71,12 @@ function Auth(children) {
       //helps return given info for each page rather than a blank for login
       const user = isLoginRoute ? {email, password} : {email, username, password};
 
-      console.log(user)
+      handleAPICallButtonSubmit({
+         method: "post",
+         data: {
+            ...user,
+         },
+      });
    }
 
    return (

@@ -1,16 +1,19 @@
+import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import MainRouter from './MainRouter';
 import Spinner from './Spinner/Spinner';
 
+import AuthContextWrapper from './context/AuthContext';
 import './App.css';
-import React from 'react';
 
 function App() {
   return (
     <React.Suspense fallback={<Spinner />}>
       <Router>
-        <MainRouter />
+        <AuthContextWrapper>
+          <MainRouter />
+        </AuthContextWrapper>
       </Router>
     </React.Suspense>
   );
