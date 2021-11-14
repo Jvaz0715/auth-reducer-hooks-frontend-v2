@@ -96,7 +96,15 @@ function Auth(props) {
             <Alert severity="error">{error}</Alert>
          </Snackbar>
       )
-   }
+   };
+
+   if(isLoading) {
+      return (
+         <div style={{ textAlign: "center" }}>
+            <CircularProgress />
+         </div>
+      )
+   };
 
    return (
       <Grid container spacing={0} justifyContent="center">
@@ -151,6 +159,11 @@ function Auth(props) {
                   variant="contained" 
                   color="primary"
                   style={{marginTop: 10}}
+                  disabled={
+                     isLoginRoute 
+                        ? isEmailDisabled || isPasswordDisabled
+                        : isEmailDisabled || isPasswordDisabled || isUsernameDisabled
+                  }
                >
                   {buttonTitle}
                </Button>
