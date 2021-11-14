@@ -34,7 +34,7 @@ function Auth(children) {
       emailErrorMessage, 
       isEmailDisabled, 
       clearEmailInput
-   ] = useChangeInputConfig(email);
+   ] = useChangeInputConfig("email");
 
    // comes from our hooks
    const [
@@ -44,7 +44,7 @@ function Auth(children) {
       usernameErrorMessage, 
       isUsernameDisabled, 
       clearUsernameInput
-   ] = useChangeInputConfig(username);
+   ] = useChangeInputConfig("username");
 
    // comes from our hooks
    const [
@@ -54,11 +54,24 @@ function Auth(children) {
       passwordErrorMessage, 
       isPasswordDisabled, 
       clearPasswordInput
-   ] = useChangeInputConfig(password);
+   ] = useChangeInputConfig("password");
+
+   // create handleOnSubmit for form
+   function handleOnSubmit(e) {
+      e.preventDefault();
+
+      //helps return given info for each page rather than a blank for login
+      const user = isLoginRoute ? {email, password} : {email, username, password};
+
+      console.log(user)
+   }
 
    return (
       <Grid container spacing={0} justifyContent="center">
-         <form className={classes.root}>
+         <form 
+            className={classes.root}
+            onSubmit={handleOnSubmit}
+         >
             <Grid item m={6}>
                <TextField 
                   fullWidth 
