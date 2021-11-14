@@ -7,7 +7,7 @@ import {
    CircularProgress,
    Snackbar
 } from "@material-ui/core";
-import { MuiAlert } from "@material-ui/lab/Alert";
+import MuiAlert from "@material-ui/lab/Alert";
 import { useLocation } from 'react-router';
 import useChangeInputConfig from '../hooks/useInput';
 import useFetchAPI from '../hooks/useFetchAPI';
@@ -31,7 +31,9 @@ function Auth(props) {
 
    const [
       {isLoading, response, error},
-      handleAPICallButtonSubmit
+      handleAPICallButtonSubmit,
+      isMessageOpen,
+      handleMessageClose
    ] = useFetchAPI(apiURL);
 
    // comes from our hooks
@@ -77,10 +79,28 @@ function Auth(props) {
             ...user,
          },
       });
+   };
+
+   function Alert(props) {
+      return <MuiAlert elevation={6} variant="filled" {...props}/>
+   }
+
+   function errorMessage() {
+      return (
+         <Snackbar 
+            open={isMessageOpen} 
+            autoHideDuration={6000} 
+            onClose={handleMessageClose}
+            // style={{transform: "translateY(-500px)"}}
+         >
+            <Alert severity="error">{error}</Alert>
+         </Snackbar>
+      )
    }
 
    return (
       <Grid container spacing={0} justifyContent="center">
+         {error && errorMessage()}
          <form 
             className={classes.root}
             onSubmit={handleOnSubmit}

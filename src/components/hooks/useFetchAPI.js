@@ -16,9 +16,15 @@ function useFetchAPI(url) {
 
    const [isMessageOpen, setIsMessageOpen] = useState(false);
 
-   function handleMessageOpen(){};
+   function handleMessageOpen(){
+      setIsMessageOpen(true);
+   };
 
-   function handleMessageClose(){};
+   function handleMessageClose(){
+      setError(null);
+      setResponse(null);
+      setIsMessageOpen(false);
+   };
 
    function handleAPICallButtonSubmit(options = {}) {
       setOptions(options);
@@ -38,11 +44,13 @@ function useFetchAPI(url) {
 
       try {
          let response = await axios(baseURL + url, requestOptionObj);
-         console.log(response);
+         // console.log(response);
          setIsLoading(false);
       } catch(e) {
-         console.log(e.response);
+         // console.log(e.response);
+         setError(e.response.data.message)
          setIsLoading(false);
+         handleMessageOpen();
       }
    };
 
@@ -63,6 +71,9 @@ function useFetchAPI(url) {
          setResponse,
       },
       handleAPICallButtonSubmit,
+      isMessageOpen,
+      handleMessageOpen,
+      handleMessageClose,
    ];
 }
 
