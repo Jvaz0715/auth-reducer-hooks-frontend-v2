@@ -30,7 +30,7 @@ function Auth(props) {
    let apiURL = isLoginRoute ? "/users/login" : "/users/create-user";
 
    const [
-      {isLoading, response, error},
+      {isLoading, response, error, setResponse},
       handleAPICallButtonSubmit,
       isMessageOpen,
       handleMessageClose
@@ -91,12 +91,25 @@ function Auth(props) {
             open={isMessageOpen} 
             autoHideDuration={6000} 
             onClose={handleMessageClose}
-            // style={{transform: "translateY(-500px)"}}
+            
          >
             <Alert severity="error">{error}</Alert>
          </Snackbar>
       )
    };
+
+   function successMessage() {
+      return (
+         <Snackbar 
+            open={isMessageOpen} 
+            autoHideDuration={6000} 
+            onClose={handleMessageClose}
+            
+         >
+            <Alert severity="success">{response}</Alert>
+         </Snackbar>
+      )
+   }
 
    if(isLoading) {
       return (
@@ -106,8 +119,16 @@ function Auth(props) {
       )
    };
 
+   if (response === "user created") {
+      clearEmailInput();
+      clearUsernameInput();
+      clearPasswordInput();
+      setResponse(null);
+   }
+
    return (
       <Grid container spacing={0} justifyContent="center">
+         {response && successMessage()}
          {error && errorMessage()}
          <form 
             className={classes.root}
