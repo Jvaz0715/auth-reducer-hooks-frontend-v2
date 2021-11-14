@@ -6,7 +6,7 @@ import { AuthContext } from "../../context/AuthContext";
 function useFetchAPI(url) {
    const baseURL = 
       process.env.NODE_ENV === "development" 
-         ? "https://localhost:3001/api"
+         ? "http://localhost:3001/api"
          : "DEPLOYED LOCATION";
 
    const [isLoading, setIsLoading] = useState(false);
@@ -41,7 +41,7 @@ function useFetchAPI(url) {
          console.log(response);
          setIsLoading(false);
       } catch(e) {
-         console.log(e);
+         console.log(e.response);
          setIsLoading(false);
       }
    };

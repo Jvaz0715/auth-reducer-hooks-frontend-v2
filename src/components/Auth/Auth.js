@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
    }
 }));
 
-function Auth(children) {
+function Auth(props) {
    const classes = useStyles();
 
    let isLoginRoute = useLocation().pathname === "/login";
