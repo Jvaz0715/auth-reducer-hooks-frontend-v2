@@ -40,6 +40,8 @@ function useFetchAPI(url) {
       
       const requestOptionObj = {
          ...options,
+         withCredentials: true,
+         credentials: "include",
          ...{
             headers: {
                authorization: null,
