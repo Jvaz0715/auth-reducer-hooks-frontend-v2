@@ -25,17 +25,31 @@ function MainRouter() {
             <Route 
                exact 
                path="/sign-up" 
-               element={checkIfCookieExists() ? (<PrivateRoute>
-                  <Protected />
-               </PrivateRoute>) : (<Auth />)} 
-               />
+               element={
+                  checkIfCookieExists() 
+                     ? (
+                        <PrivateRoute>
+                           <Protected />
+                        </PrivateRoute>
+                     ) : (
+                        <Auth />
+                     )
+               } 
+            />
 
-            <Route 
+<Route 
                exact 
                path="/login" 
-               element={checkIfCookieExists() ? (<PrivateRoute>
-                  <Protected />
-               </PrivateRoute>) : (<Auth />)}
+               element={
+                  checkIfCookieExists() 
+                     ? (
+                        <PrivateRoute>
+                           <Protected />
+                        </PrivateRoute>
+                     ) : (
+                        <Auth />
+                     )
+               } 
             />
 
             <Route exact path="/logout" render={() => <Navigate to="/login" />} />
