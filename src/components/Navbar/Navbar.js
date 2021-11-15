@@ -1,6 +1,4 @@
 import React, { useContext, useEffect } from 'react';
-import Cookie from "js-cookie";
-import jwtDecode from 'jwt-decode';
 import { makeStyles } from "@material-ui/core/styles";
 import {
    AppBar,
@@ -9,8 +7,8 @@ import {
    Button,
 } from "@material-ui/core";
 import {NavLink, Link } from "react-router-dom";
-
 import { AuthContext } from '../../context/AuthContext';
+import CheckAuthCookie from '../hooks/CheckAuthCookie';
 
 const useStyles = makeStyles((theme) => ({
    root: {
@@ -26,29 +24,14 @@ const useStyles = makeStyles((theme) => ({
 
 function Navbar() {
    const classes = useStyles();
+   const { logUserIn } = CheckAuthCookie();
 
    useEffect(() => {
-      const cookie = Cookie.get("jwt-cookie");
-
-      if (cookie) {
-         const jwtDecodedToken = jwtDecode(cookie);
-         console.log(jwtDecodedToken)
-
-         dispatch({
-            type: "LOGIN",
-            user: {
-               email: jwtDecodedToken.email,
-               username: jwtDecodedToken.username,
-            },
-         });
-      };
-
-      
+      logUserIn()
    }, [])
 
    const {
       state: { user },
-      dispatch
    } = useContext(AuthContext);
 
    const isUserLoggedIn = user ? true : false;
