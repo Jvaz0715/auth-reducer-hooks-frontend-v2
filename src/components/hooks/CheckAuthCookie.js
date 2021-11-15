@@ -16,9 +16,9 @@ function CheckAuthCookie() {
    };
 
    function logUserIn() {
-      let cookie = checkIfCookieExists();
+      let checkCookieExists = checkIfCookieExists();
 
-      if(cookie) {
+      if(checkCookieExists) {
          const cookie = Cookie.get("jwt-cookie");
          const jwtDecodedToken = jwtDecode(cookie);
          // console.log(jwtDecodedToken)
