@@ -31,9 +31,11 @@ function Auth(props) {
 
    const [
       {isLoading, response, error, setResponse},
-      handleAPICallButtonSubmit,
+      successMessageValue,
       isMessageOpen,
-      handleMessageClose
+      handleAPICallButtonSubmit,
+      ,
+      handleMessageClose,
    ] = useFetchAPI(apiURL);
 
    // comes from our hooks
@@ -106,7 +108,7 @@ function Auth(props) {
             onClose={handleMessageClose}
             
          >
-            <Alert severity="success">{response}</Alert>
+            <Alert severity="success">{successMessageValue}</Alert>
          </Snackbar>
       )
    }
@@ -128,7 +130,7 @@ function Auth(props) {
 
    return (
       <Grid container spacing={0} justifyContent="center">
-         {response && successMessage()}
+         {successMessageValue && successMessage()}
          {error && errorMessage()}
          <form 
             className={classes.root}

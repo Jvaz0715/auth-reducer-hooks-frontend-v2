@@ -16,6 +16,10 @@ function useFetchAPI(url) {
 
    const [isMessageOpen, setIsMessageOpen] = useState(false);
 
+   const [successMessageValue, setSuccessMessageValue] = useState(null);
+
+   const { dispatch } = useContext(AuthContext);
+
    function handleMessageOpen(){
       setIsMessageOpen(true);
    };
@@ -24,6 +28,7 @@ function useFetchAPI(url) {
       setError(null);
       setResponse(null);
       setIsMessageOpen(false);
+      setSuccessMessageValue(null);
    };
 
    function handleAPICallButtonSubmit(options = {}) {
@@ -49,6 +54,16 @@ function useFetchAPI(url) {
             setResponse(response.data.message);
             handleMessageOpen();
             setIsLoading(false)
+            setSuccessMessageValue(response.data.message)
+         } else {
+            setIsLoading(false);
+            dispatch({
+               type: "LOGIN",
+               user: {
+                  email: response.data.user.email,
+                  username: response.data.user.username,
+               }
+            })
          }
       } catch(e) {
          // console.log(e.response);
@@ -74,8 +89,9 @@ function useFetchAPI(url) {
          setError,
          setResponse,
       },
-      handleAPICallButtonSubmit,
+      successMessageValue,
       isMessageOpen,
+      handleAPICallButtonSubmit,
       handleMessageOpen,
       handleMessageClose,
    ];
