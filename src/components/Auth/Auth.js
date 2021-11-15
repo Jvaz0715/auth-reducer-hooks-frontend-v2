@@ -9,8 +9,11 @@ import {
 } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
 import { useLocation } from 'react-router';
+import { useNavigate } from "react-router-dom";
 import useChangeInputConfig from '../hooks/useInput';
 import useFetchAPI from '../hooks/useFetchAPI';
+import CheckAuthCookie from "../hooks/CheckAuthCookie";
+
 
 const useStyles = makeStyles((theme) => ({
    root: {
@@ -23,11 +26,15 @@ const useStyles = makeStyles((theme) => ({
 
 function Auth(props) {
    const classes = useStyles();
+   const navigate = useNavigate();
+   const location = useLocation();
 
    let isLoginRoute = useLocation().pathname === "/login";
    let buttonTitle = isLoginRoute ? "Login" : "Sign up";
    // for axios request
    let apiURL = isLoginRoute ? "/users/login" : "/users/create-user";
+
+   const { checkIfCookieExists } = CheckAuthCookie();
 
    const [
       {isLoading, response, error, setResponse},
@@ -126,6 +133,15 @@ function Auth(props) {
       clearUsernameInput();
       clearPasswordInput();
       setResponse(null);
+   };
+
+   if (checkIfCookieExists()) {
+      
+      if(location.pathname === "/login" || location.pathname === "/sign-up"){
+         navigate("/protected")
+      } else {
+         return location.pathname;
+      };
    }
 
    return (

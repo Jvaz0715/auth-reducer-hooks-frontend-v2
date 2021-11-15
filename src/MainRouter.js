@@ -4,6 +4,7 @@ import {
    Routes, 
    Navigate, 
 } from 'react-router-dom';
+import CheckAuthCookie from "../src/components/hooks/CheckAuthCookie";
 
 import Navbar from "./components/Navbar/Navbar";
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
@@ -14,12 +15,29 @@ const Protected = React.lazy(() => import("./components/Protected/Protected"));
 
 
 function MainRouter() {
+   const { checkIfCookieExists } = CheckAuthCookie();
    return (
       <>
          <Navbar />
          <Routes>
-            <Route exact path="/sign-up" element={<Auth />} />
-            <Route exact path="/login" element={<Auth />} />
+            {/* <Route exact path="/sign-up" element={<Auth />} />
+            <Route exact path="/login" element={<Auth />} /> */}
+            <Route 
+               exact 
+               path="/sign-up" 
+               element={checkIfCookieExists() ? (<PrivateRoute>
+                  <Protected />
+               </PrivateRoute>) : (<Auth />)} 
+               />
+
+            <Route 
+               exact 
+               path="/login" 
+               element={checkIfCookieExists() ? (<PrivateRoute>
+                  <Protected />
+               </PrivateRoute>) : (<Auth />)}
+            />
+
             <Route exact path="/logout" render={() => <Navigate to="/login" />} />
             <Route exact path="/" element={<Home />} />
             <Route
