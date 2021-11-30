@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Navbar() {
    const classes = useStyles();
-   const { logUserIn } = CheckAuthCookie();
+   const { logUserIn, logUserOut } = CheckAuthCookie();
 
    useEffect(() => {
       logUserIn()
@@ -40,7 +40,7 @@ function Navbar() {
 
    const navLinkDisplayOne = isUserLoggedIn ? `${user.email}` : "login";
 
-   const navLinkTitleTwo = isUserLoggedIn ? "/logout" : "/sign-up";
+   const navLinkTitleTwo = isUserLoggedIn ? "/" : "/sign-up";
 
    const navLinkDisplayTwo = isUserLoggedIn ? "Logout" : "Sign Up";
 
@@ -58,7 +58,9 @@ function Navbar() {
                      {navLinkDisplayOne}
                   </Button>
                </NavLink>
-               <NavLink activeStyle={{color: "red"}} exact to={navLinkTitleTwo}>
+
+
+               <NavLink activeStyle={{color: "red"}} exact to={navLinkTitleTwo} onClick={ () => logUserOut()}>
                   <Button color="inherit" style={{color: "white"}}>
                      {navLinkDisplayTwo}
                   </Button>

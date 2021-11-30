@@ -33,9 +33,19 @@ function CheckAuthCookie() {
       }
    };
 
+   function logUserOut() {
+      if(checkIfCookieExists()) {
+         Cookie.remove("jwt-cookie")
+      }
+      dispatch({
+         type: "LOG_OUT"
+      })
+   }
+
    return {
       checkIfCookieExists,
-      logUserIn
+      logUserIn,
+      logUserOut
    };
 
 };

@@ -14,7 +14,6 @@ const Protected = React.lazy(() => import("./components/Protected/Protected"));
 
 
 function MainRouter(props) {
-   // const { checkIfCookieExists } = CheckAuthCookie();
    return (
       <Router>
          <Navbar />
