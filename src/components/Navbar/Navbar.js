@@ -53,12 +53,12 @@ function Navbar() {
                      React Auth Hooks Fullstack
                   </Link>
                </Typography>
-               <NavLink activestyle={{color: "red"}} exact="true" to={navLinkTitleOne}>
+               <NavLink activeStyle={{color: "red"}} exact to={navLinkTitleOne}>
                   <Button color="inherit" style={{color: "white"}}>
                      {navLinkDisplayOne}
                   </Button>
                </NavLink>
-               <NavLink activestyle={{color: "red"}} exact="true" to={navLinkTitleTwo}>
+               <NavLink activeStyle={{color: "red"}} exact to={navLinkTitleTwo}>
                   <Button color="inherit" style={{color: "white"}}>
                      {navLinkDisplayTwo}
                   </Button>

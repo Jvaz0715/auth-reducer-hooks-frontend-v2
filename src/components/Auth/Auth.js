@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Auth(props) {
-   console.log(props.location.pathname)
+   // console.log(props.location.pathname)
    const classes = useStyles();
 
    let isLoginRoute =  props.location.pathname === "/login";

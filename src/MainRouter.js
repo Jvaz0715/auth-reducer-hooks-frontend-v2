@@ -21,6 +21,12 @@ function MainRouter(props) {
          <>
             <Route 
                exact 
+               path="/" 
+               component={Home} 
+            />
+
+            <Route 
+               exact 
                path="/sign-up" 
                component={Auth}
             />
@@ -31,15 +37,10 @@ function MainRouter(props) {
                component={Auth} 
             />
 
-            <Route exact path="/" component={Home} />
-            <Route
+            <PrivateRoute 
                exact
                path="/protected"
-               element={
-                  <PrivateRoute>
-                     <Protected />
-                  </PrivateRoute>
-               }
+               component={Protected}
             />
 
             {/* <Route path="*" component={NotFound} /> */}
