@@ -8,8 +8,6 @@ import {
    Snackbar
 } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
-import { useLocation } from 'react-router';
-import { useNavigate } from "react-router-dom";
 import useChangeInputConfig from '../hooks/useInput';
 import useFetchAPI from '../hooks/useFetchAPI';
 import CheckAuthCookie from "../hooks/CheckAuthCookie";
@@ -25,11 +23,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Auth(props) {
+   console.log(props.location.pathname)
    const classes = useStyles();
-   const navigate = useNavigate();
-   const location = useLocation();
 
-   let isLoginRoute = useLocation().pathname === "/login";
+   let isLoginRoute =  props.location.pathname === "/login";
    let buttonTitle = isLoginRoute ? "Login" : "Sign up";
    // for axios request
    let apiURL = isLoginRoute ? "/users/login" : "/users/create-user";
@@ -137,10 +134,10 @@ function Auth(props) {
 
    if (checkIfCookieExists()) {
       
-      if(location.pathname === "/login" || location.pathname === "/sign-up"){
-         navigate("/protected")
+      if(props.location.pathname === "/login" || props.location.pathname === "/sign-up"){
+         props.history.push("/protected")
       } else {
-         return location.pathname;
+         return props.location.pathname;
       };
    }
 

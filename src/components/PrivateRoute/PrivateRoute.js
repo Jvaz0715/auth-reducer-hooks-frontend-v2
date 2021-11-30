@@ -1,16 +1,25 @@
 import React, {useContext} from "react";
-import {  
-   Navigate, 
-} from 'react-router-dom';
+import {Route, Redirect } from "react-router-dom";
 import {AuthContext} from "../../context/AuthContext";
 import CheckAuthCookie from "../hooks/CheckAuthCookie";
 
-function PrivateRoute({ children }) {
+function PrivateRoute({ component: Component, ...rest }) {
    const { state: user } = useContext(AuthContext);
 
    const { checkIfCookieExists } = CheckAuthCookie();
 
-   return checkIfCookieExists() ? children : <Navigate to="/login" />;
+   // return checkIfCookieExists() ? children : <Navigate to="/login" />;
+
+   return (
+      <Route
+         {...rest}
+         render={(routerProps) => (
+            checkIfCookieExists()
+               ? <Component {...routerProps}/>
+               : <Redirect to="/login" />
+         )}
+      />
+   )
 }
 
 export default PrivateRoute;

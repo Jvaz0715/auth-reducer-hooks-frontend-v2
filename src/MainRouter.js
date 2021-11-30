@@ -1,8 +1,7 @@
 import React from 'react';
 import { 
+   BrowserRouter as Router, 
    Route, 
-   Routes, 
-   Navigate, 
 } from 'react-router-dom';
 import CheckAuthCookie from "../src/components/hooks/CheckAuthCookie";
 
@@ -14,46 +13,25 @@ const NotFound = React.lazy(() => import("./components/NotFound/NotFound"));
 const Protected = React.lazy(() => import("./components/Protected/Protected"));
 
 
-function MainRouter() {
+function MainRouter(props) {
    const { checkIfCookieExists } = CheckAuthCookie();
    return (
-      <>
+      <Router>
          <Navbar />
-         <Routes>
-            {/* <Route exact path="/sign-up" element={<Auth />} />
-            <Route exact path="/login" element={<Auth />} /> */}
+         <>
             <Route 
                exact 
                path="/sign-up" 
-               element={
-                  checkIfCookieExists() 
-                     ? (
-                        <PrivateRoute>
-                           <Protected />
-                        </PrivateRoute>
-                     ) : (
-                        <Auth />
-                     )
-               } 
+               component={Auth}
             />
 
-<Route 
+            <Route 
                exact 
                path="/login" 
-               element={
-                  checkIfCookieExists() 
-                     ? (
-                        <PrivateRoute>
-                           <Protected />
-                        </PrivateRoute>
-                     ) : (
-                        <Auth />
-                     )
-               } 
+               component={Auth} 
             />
 
-            <Route exact path="/logout" render={() => <Navigate to="/login" />} />
-            <Route exact path="/" element={<Home />} />
+            <Route exact path="/" component={Home} />
             <Route
                exact
                path="/protected"
@@ -64,9 +42,9 @@ function MainRouter() {
                }
             />
 
-            <Route path="*" element={<NotFound />} />
-      </Routes>
+            {/* <Route path="*" component={NotFound} /> */}
       </>
+      </Router>
    )
 };
 
