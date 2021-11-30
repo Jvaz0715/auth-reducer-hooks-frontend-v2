@@ -3,18 +3,18 @@ import {
    BrowserRouter as Router, 
    Route, 
 } from 'react-router-dom';
-import CheckAuthCookie from "../src/components/hooks/CheckAuthCookie";
+// import CheckAuthCookie from "../src/components/hooks/CheckAuthCookie";
 
 import Navbar from "./components/Navbar/Navbar";
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 const Auth = React.lazy(() => import("./components/Auth/Auth"));
 const Home = React.lazy(() => import("./components/Home/Home"));
-const NotFound = React.lazy(() => import("./components/NotFound/NotFound"));
+// const NotFound = React.lazy(() => import("./components/NotFound/NotFound"));
 const Protected = React.lazy(() => import("./components/Protected/Protected"));
 
 
 function MainRouter(props) {
-   const { checkIfCookieExists } = CheckAuthCookie();
+   // const { checkIfCookieExists } = CheckAuthCookie();
    return (
       <Router>
          <Navbar />
@@ -34,7 +34,8 @@ function MainRouter(props) {
             <Route 
                exact 
                path="/login" 
-               component={Auth} 
+               // component={Auth} 
+               render={(routerProps) => <Auth {...routerProps} handleUserLogin={props.handleUserLogin}/>}
             />
 
             <PrivateRoute 
