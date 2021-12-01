@@ -28,6 +28,7 @@ function Navbar() {
 
    useEffect(() => {
       logUserIn()
+      logUserOut()
    }, [])
 
    const {
@@ -59,9 +60,12 @@ function Navbar() {
                   </Button>
                </NavLink>
 
-
-               <NavLink activeStyle={{color: "red"}} exact to={navLinkTitleTwo} onClick={ () => logUserOut()}>
-                  <Button color="inherit" style={{color: "white"}}>
+               <NavLink activeStyle={{color: "red"}} exact to={navLinkTitleTwo}>
+                  <Button 
+                  color="inherit" 
+                  style={{color: "white"}}
+                  onClick={()=> logUserOut()}
+                  >
                      {navLinkDisplayTwo}
                   </Button>
                </NavLink>

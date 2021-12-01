@@ -34,12 +34,8 @@ function CheckAuthCookie() {
    };
 
    function logUserOut() {
-      let checkCookieExists = checkIfCookieExists();
+      Cookie.remove("jwt-cookie");
 
-      if(checkIfCookieExists) {
-         Cookie.set("jwt-cookie", "");
-      } 
-      
       dispatch({
          type: "LOG_OUT"
       })
