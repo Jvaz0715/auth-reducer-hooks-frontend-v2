@@ -50,4 +50,4 @@ function MainRouter(props) {
    )
 };
 
-export default MainRouter
+export default MainRouter;
