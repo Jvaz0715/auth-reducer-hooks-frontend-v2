@@ -9,7 +9,7 @@ function Protected() {
    console.log(user)
    return (
       <div>
-         Protected!
+         Welcome {user.username}
       </div>
    )
 }
