@@ -28,7 +28,6 @@ function Navbar() {
 
    useEffect(() => {
       logUserIn()
-      logUserOut()
    }, [])
 
    const {
