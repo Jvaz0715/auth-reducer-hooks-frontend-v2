@@ -210,4 +210,4 @@ function Auth(props) {
    )
 }
 
-export default Auth
+export default Auth;

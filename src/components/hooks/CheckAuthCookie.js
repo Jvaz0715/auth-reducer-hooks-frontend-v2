@@ -39,7 +39,7 @@ function CheckAuthCookie() {
       dispatch({
          type: "LOG_OUT"
       })
-   }
+   };
 
    return {
       checkIfCookieExists,
