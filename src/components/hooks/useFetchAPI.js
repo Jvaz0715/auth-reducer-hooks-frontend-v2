@@ -7,7 +7,7 @@ function useFetchAPI(url) {
    const baseURL = 
       process.env.NODE_ENV === "development" 
          ? "http://localhost:3001/api"
-         : "DEPLOYED LOCATION";
+         : "/";
 
    const [isLoading, setIsLoading] = useState(false);
    const [response, setResponse] = useState(null);
