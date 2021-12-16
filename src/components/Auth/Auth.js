@@ -115,7 +115,7 @@ function Auth(props) {
             <Alert severity="success">{successMessageValue}</Alert>
          </Snackbar>
       )
-   }
+   };
 
    if(isLoading) {
       return (
